@@ -3,6 +3,7 @@ package tests;
 import org.project.base.TestBase;
 import org.project.pages.ContactUsPage;
 import org.project.pages.HomePage;
+import org.project.pages.TestCasePage;
 import org.project.utils.FileUtils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -37,10 +38,20 @@ public class PageTests extends TestBase {
 
     @Test
     public void testCasePage(){
+        HomePage homePage = new HomePage(driver);
+        homePage.navigateUrl(HomePage.url);
+        Assert.assertTrue(homePage.isDisplayed());
+
+        TestCasePage testCasePage = homePage.clickTestCaseButton();
+
+        Assert.assertTrue(testCasePage.isTestCaseTextDisplayed());
 
     }
     @Test
     public void productPage(){
+        HomePage homePage = new HomePage(driver);
+        homePage.navigateUrl(HomePage.url);
+        Assert.assertTrue(homePage.isDisplayed());
 
     }
 }
