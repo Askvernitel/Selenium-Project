@@ -14,4 +14,12 @@ public class AccountClient {
                 .when()
                 .post("/createAccount");
     }
+
+
+    public Response deleteAccount(Account account){
+        return given().spec(RequestSpecFactory.defaultJsonSpec())
+                .body(account)
+                .when()
+                .post("/deleteAccount");
+    }
 }

@@ -9,7 +9,7 @@ public class LoginPage extends PageBase{
 
     private String signupText = "New User Signup!";
     private String loginText = "Login to your account";
-
+    private String invalidLoginText = "Your email or password is incorrect!";
 
 
     private By signupNameInputLocator = new By.ByCssSelector("input[data-qa='signup-name']");
@@ -63,5 +63,13 @@ public class LoginPage extends PageBase{
 
     public Boolean isLoginTextDisplayed(){
         return isTextVisible(loginText);
+    }
+
+    public Boolean isInvalidLoginTextDisplayed(){
+        return isTextVisible(invalidLoginText);
+    }
+
+    public void clickLoginButtonNoRedirect() {
+        click(loginButtonLocator);
     }
 }

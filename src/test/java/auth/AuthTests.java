@@ -1,6 +1,5 @@
 package auth;
 
-import io.restassured.response.Response;
 import org.project.base.TestBase;
 import org.project.client.AccountClient;
 import org.project.dto.Account;
@@ -12,7 +11,7 @@ public class AuthTests extends TestBase {
 
 
     @Test
-    public void registerUser() {
+    public void registerAccount() {
         HomePage homePage = new HomePage(driver);
         homePage.navigateUrl(HomePage.url);
         Assert.assertTrue(homePage.isDisplayed());
@@ -59,7 +58,7 @@ public class AuthTests extends TestBase {
     }
 
     @Test
-    public void loginUser(){
+    public void loginValidAccount(){
         Account account = new Account.Builder()
                 .name("Daniel")
                 .email("DanielTestWA213451@gmail.com")
@@ -80,8 +79,7 @@ public class AuthTests extends TestBase {
                 .mobileNumber("5010")
                 .build();
         AccountClient accountClient = new AccountClient();
-        Response response = accountClient.createAccount(account);
-        System.out.println(response.getBody().print());
+        accountClient.createAccount(account);
 
         HomePage homePage = new HomePage(driver);
         homePage.navigateUrl(HomePage.url);
@@ -100,5 +98,68 @@ public class AuthTests extends TestBase {
         Assert.assertTrue(accountDeletedPage.isAccountDeletedTextVisible());
     }
 
+    @Test
+    public void loginInvalidAccount() {
+        Account account = new Account.Builder()
+                .email("DanielTestWA213451@gmail.com")
+                .password("TestPassword")
+                .build();
+        AccountClient accountClient = new AccountClient();
+        accountClient.deleteAccount(account);
+
+        HomePage homePage = new HomePage(driver);
+        homePage.navigateUrl(HomePage.url);
+        Assert.assertTrue(homePage.isDisplayed());
+
+        LoginPage loginPage = homePage.clickLoginButton();
+        Assert.assertTrue(loginPage.isLoginTextDisplayed());
+
+
+        loginPage.setLoginEmail("DanielTestWA213451@gmail.com")
+                .setLoginPassword("TestPassword")
+                .clickLoginButtonNoRedirect();
+
+        Assert.assertTrue(loginPage.isInvalidLoginTextDisplayed());
+    }
+
+
+    @Test
+    public void logoutAccount(){
+        Account account = new Account.Builder()
+                .name("Daniel")
+                .email("DanielTestWA213451@gmail.com")
+                .password("TestPassword")
+                .title("Mr")
+                .birthDate("1")
+                .birthMonth("February")
+                .birthYear("2006")
+                .firstname("Daniel")
+                .lastname("Kolotashvili")
+                .company("CoolSoft")
+                .address1("Test Addres 1")
+                .address2("Test Address 2")
+                .country("Canada")
+                .state("Canada State")
+                .city("City")
+                .zipcode("1400")
+                .mobileNumber("5010")
+                .build();
+        AccountClient accountClient = new AccountClient();
+        accountClient.createAccount(account);
+
+        HomePage homePage = new HomePage(driver);
+        homePage.navigateUrl(HomePage.url);
+        Assert.assertTrue(homePage.isDisplayed());
+
+        LoginPage loginPage = homePage.clickLoginButton();
+        Assert.assertTrue(loginPage.isLoginTextDisplayed());
+
+        homePage = loginPage
+                .setLoginEmail("DanielTestWA213451@gmail.com")
+                .setLoginPassword("TestPassword")
+                .clickLoginButton();
+
+
+    }
 
 }
