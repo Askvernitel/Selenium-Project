@@ -5,14 +5,14 @@
         <parameter name="BROWSER" value="Firefox"/>
         <parameter name="AUTH_DATA_FILEPATH" value="test-data/auth/data.json"/>
         <classes>
-            <class name="tests.AuthTests" > </class>
+            <class name="tests.ui.AuthTests" > </class>
         </classes>
     </test>
     <test name="Page Tests">
         <parameter name="BROWSER" value="Firefox"/>
         <parameter name="AUTH_DATA_FILEPATH" value="test-data/auth/data.json"/>
         <classes>
-            <class name="tests.PageTests" > </class>
+            <class name="tests.ui.PageTests" ></class>
         </classes>
     </test>
 </suite>

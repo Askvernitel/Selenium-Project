@@ -1,4 +1,4 @@
-package tests;
+package tests.ui;
 
 import org.project.base.TestBase;
 import org.project.components.ProductCardComponent;
@@ -66,7 +66,7 @@ public class PageTests extends TestBase {
     }
 
     @Test
-    public void productSearch(){
+    public void searchProduct(){
         HomePage homePage = new HomePage(driver);
         homePage.navigateUrl(HomePage.url);
         Assert.assertTrue(homePage.isDisplayed());
@@ -86,6 +86,22 @@ public class PageTests extends TestBase {
         for(ProductCardComponent product:products){
             Assert.assertEquals(product.getProductTitle(), "Blue Top");
         }
+    }
+
+
+    @Test
+    public void verifySubscription(){
+        HomePage homePage = new HomePage(driver);
+        homePage.navigateUrl(HomePage.url);
+        Assert.assertTrue(homePage.isDisplayed());
+
+        homePage.scrollToFooter();
+
+        Assert.assertTrue(homePage.isSubscriptionTextVisible());
+
+        homePage.setSubscribeEmail("Daniel@gmail.com").clickSubscriptionButton();
+
+        Assert.assertTrue(homePage.isSuccessfulSubscriptionTextVisible());
     }
 
 }
