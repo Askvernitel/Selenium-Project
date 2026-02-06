@@ -26,4 +26,9 @@ public class ProductTest extends ApiTestBase {
                 .body("products", is(not(empty())));
 
     }
+
+    @Test
+    public void getAllBrands(){
+
+    }
 }

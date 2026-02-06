@@ -23,5 +23,17 @@ public class AccountClient {
                 .delete("/deleteAccount");
     }
 
+    public Response getAccountByEmail(String email){
+        String requestBody = String.format("""
+            {
+            "email":"%s"
+            }
+        """, email);
+        return given().spec(RequestSpecFactory.defaultJsonSpec())
+                .body(requestBody)
+                .when()
+                .get("/getUserDetailByEmail");
+    }
+
 
 }

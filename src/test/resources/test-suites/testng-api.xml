@@ -2,13 +2,13 @@
 <suite name="Different Endpoint Tests" parallel="tests" verbose="1">
     <test name="Account API Tests">
         <classes>
-            <class name="tests.api.ProductTest" > </class>
+            <class name="tests.api.AccountTest" ></class>
         </classes>
     </test>
     <test name="Product API Tests">
 
         <classes>
-            <class name="tests.api.AccountTest" ></class>
+            <class name="tests.api.ProductTest" > </class>
         </classes>
     </test>
 </suite>
