@@ -1,5 +1,6 @@
 package auth;
 
+import io.restassured.response.Response;
 import org.project.base.TestBase;
 import org.project.client.AccountClient;
 import org.project.dto.Account;
@@ -78,7 +79,9 @@ public class AuthTests extends TestBase {
                 .zipcode("1400")
                 .mobileNumber("5010")
                 .build();
-
+        AccountClient accountClient = new AccountClient();
+        Response response = accountClient.createAccount(account);
+        System.out.println(response.getBody().print());
 
         HomePage homePage = new HomePage(driver);
         homePage.navigateUrl(HomePage.url);
@@ -88,8 +91,8 @@ public class AuthTests extends TestBase {
         Assert.assertTrue(loginPage.isLoginTextDisplayed());
 
         homePage = loginPage
-                .setLoginEmail("danikolotasvili@gmail.com")
-                .setLoginPassword("daniel123")
+                .setLoginEmail("DanielTestWA213451@gmail.com")
+                .setLoginPassword("TestPassword")
                 .clickLoginButton();
 
         Assert.assertTrue(homePage.isTextVisible("Logged in as Daniel"));

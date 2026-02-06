@@ -2,6 +2,9 @@ package org.project.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Account {
     private String name;
     private String email;
@@ -169,7 +172,28 @@ public class Account {
         this.mobileNumber = mobileNumber;
     }
 
-    // Builder pattern for easier object creation
+    public Map<String, String> toMap() {
+        Map<String, String> map = new HashMap<>();
+        map.put("name", this.name);
+        map.put("email", this.email);
+        map.put("password", this.password);
+        map.put("title", this.title);
+        map.put("birth_date", this.birthDate);
+        map.put("birth_month", this.birthMonth);
+        map.put("birth_year", this.birthYear);
+        map.put("firstname", this.firstname);
+        map.put("lastname", this.lastname);
+        map.put("company", this.company);
+        map.put("address1", this.address1);
+        map.put("address2", this.address2);
+        map.put("country", this.country);
+        map.put("zipcode", this.zipcode);
+        map.put("state", this.state);
+        map.put("city", this.city);
+        map.put("mobile_number", this.mobileNumber);
+        return map;
+    }
+
     public static class Builder {
         private Account account;
 

@@ -14,4 +14,12 @@ public class RequestSpecFactory {
                 .log(LogDetail.ALL)
                 .build();
     }
+
+    public static RequestSpecification defaultFormDataSpec(){
+        return new RequestSpecBuilder()
+                .setBaseUri("https://automationexercise.com/api")
+                .setContentType(ContentType.URLENC)
+                .log(LogDetail.ALL)
+                .build();
+    }
 }

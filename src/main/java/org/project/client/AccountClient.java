@@ -9,9 +9,9 @@ public class AccountClient {
 
 
     public Response createAccount(Account account){
-        return given().spec(RequestSpecFactory.defaultJsonSpec())
-                .body(account)
+        return given().spec(RequestSpecFactory.defaultFormDataSpec())
+                .formParams(account.toMap())
                 .when()
-                .post("/create");
+                .post("/createAccount");
     }
 }
