@@ -69,6 +69,14 @@ public abstract class PageBase {
     public Boolean isTextVisible(String text){
         return this.searchByText(text).isDisplayed();
     }
+    public Boolean isDisplayed(By locator){
+        try {
+            findElement(locator).isDisplayed();
+            return true;
+        }catch(Exception e){
+            return false;
+        }
+    }
 
     public void waitUrlChangeTo(String url) {
         wait.until(ExpectedConditions.urlToBe(url));

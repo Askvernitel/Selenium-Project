@@ -2,7 +2,6 @@ package org.project.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.project.base.PageBase;
 
 public class HomePage extends PageBase {
@@ -14,6 +13,8 @@ public class HomePage extends PageBase {
     private By.ByCssSelector deleteAccountButtonLocator = new By.ByCssSelector("a[href='/delete_account']");
     private By.ByCssSelector contactUsButtonLocator = new By.ByCssSelector("a[href='/contact_us']");
     private By.ByCssSelector testCaseButtonLocator = new By.ByCssSelector("a[href='/test_cases']");
+    private By.ByCssSelector productsButtonLocator = new By.ByCssSelector("a[href='/products']");
+
 
     public HomePage(WebDriver driver){
         super(driver);
@@ -47,6 +48,13 @@ public class HomePage extends PageBase {
         waitUrlChangeTo(TestCasePage.url);
         return new TestCasePage(driver);
     }
+
+    public ProductsPage clickProductsButton(){
+        click(testCaseButtonLocator);
+        waitUrlChangeTo(ProductsPage.url);
+        return new ProductsPage(driver);
+    }
+
 
 
 

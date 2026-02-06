@@ -3,6 +3,7 @@ package tests;
 import org.project.base.TestBase;
 import org.project.pages.ContactUsPage;
 import org.project.pages.HomePage;
+import org.project.pages.ProductsPage;
 import org.project.pages.TestCasePage;
 import org.project.utils.FileUtils;
 import org.testng.Assert;
@@ -52,6 +53,12 @@ public class PageTests extends TestBase {
         HomePage homePage = new HomePage(driver);
         homePage.navigateUrl(HomePage.url);
         Assert.assertTrue(homePage.isDisplayed());
+
+        ProductsPage productsPage = homePage.clickProductsButton();
+
+        Assert.assertTrue(productsPage.isAllProductsTextDisplayed());
+        Assert.assertTrue(productsPage.isProductDivDisplayed());
+
 
     }
 }
