@@ -30,9 +30,15 @@ public class AccountTest {
     public void deleteAccount(){
         Account account = TestDataFactory.getAccount();
         accountClient.createAccount(account);
-        accountClient.deleteAccount(account);
+        accountClient.deleteAccount(account)
+                .then()
+                .statusCode(HttpStatus.SC_SUCCESS)
+                .body("responseCode", equalTo(200))
+                .body("message", equalTo("User updated!"));
 
-        accountClient.getAccountByEmail(account.getEmail());
+        accountClient.getAccountByEmail(account.getEmail())
+                .then()
+                .statusCode(not(equalTo(200)));
     }
 
 

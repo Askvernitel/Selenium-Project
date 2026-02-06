@@ -23,6 +23,14 @@ public class AccountClient {
                 .delete("/deleteAccount");
     }
 
+    public Response updateAccount(Account account){
+        return given().spec(RequestSpecFactory.defaultFormDataSpec())
+                .formParams(account.toMap())
+                .when()
+                .delete("/deleteAccount");
+    }
+
+
     public Response getAccountByEmail(String email){
         String requestBody = String.format("""
             {

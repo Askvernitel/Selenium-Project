@@ -29,6 +29,13 @@ public class ProductTest extends ApiTestBase {
 
     @Test
     public void getAllBrands(){
-
+        productClient
+                .getAllBrands()
+                .then()
+                .statusCode(HttpStatus.SC_SUCCESS)
+                .using()
+                .parser("text/html", Parser.JSON)
+                .body("responseCode", equalTo(200))
+                .body("brands", is(not(empty())));
     }
 }

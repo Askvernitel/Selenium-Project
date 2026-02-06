@@ -14,4 +14,33 @@ public class ProductClient {
                 .when()
                 .get("/productsList");
     }
+    public Response postAllProducts(){
+        return given().spec(RequestSpecFactory.defaultJsonSpec())
+                .when()
+                .post("/productsList");
+    }
+
+    public Response getAllBrands(){
+        return given().spec(RequestSpecFactory.defaultJsonSpec())
+                .when()
+                .get("/brandsList");
+    }
+
+
+    public Response postAllBrands(){
+        return given().spec(RequestSpecFactory.defaultJsonSpec())
+                .when()
+                .post("/productsList");
+    }
+
+
+
+
+    public Response searchAllProducts(){
+        return given().spec(RequestSpecFactory.defaultJsonSpec())
+                .when()
+                .get("/brandsList");
+    }
+
+
 }
