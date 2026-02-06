@@ -9,7 +9,7 @@ import org.testng.ITestContext;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
-public abstract class TestBase {
+public abstract class UiTestBase {
     protected Config config;
     protected WebDriver driver;
 

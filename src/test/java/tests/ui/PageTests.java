@@ -1,6 +1,6 @@
 package tests.ui;
 
-import org.project.base.TestBase;
+import org.project.base.UiTestBase;
 import org.project.components.ProductCardComponent;
 import org.project.pages.*;
 import org.project.utils.FileUtils;
@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-public class PageTests extends TestBase {
+public class PageTests extends UiTestBase {
 
     @Test
     public void contactUsPage(){

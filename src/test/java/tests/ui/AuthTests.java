@@ -1,14 +1,14 @@
 package tests.ui;
 
 import io.restassured.response.Response;
-import org.project.base.TestBase;
+import org.project.base.UiTestBase;
 import org.project.client.AccountClient;
 import org.project.dto.Account;
 import org.project.pages.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class AuthTests extends TestBase {
+public class AuthTests extends UiTestBase {
 
 
     @Test(priority = 0)
