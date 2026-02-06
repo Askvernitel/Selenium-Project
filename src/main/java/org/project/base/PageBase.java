@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import java.time.Duration;
+import java.util.List;
 
 public abstract class PageBase {
     protected WebDriver driver;
@@ -86,8 +87,9 @@ public abstract class PageBase {
         return this.wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
-
-
+    public List<WebElement> findElements(By locator){
+        return this.wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
+    }
 
     public Boolean isVisible(By locator){
         try {

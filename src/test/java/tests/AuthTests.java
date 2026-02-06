@@ -170,7 +170,7 @@ public class AuthTests extends TestBase {
 
     }
 
-    @Test(priority = 4)
+    @Test(priority = 0)
     public void registerExistingAccount() {
         Account account = new Account.Builder()
                 .name("Daniel")

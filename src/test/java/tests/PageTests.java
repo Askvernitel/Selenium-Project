@@ -1,10 +1,13 @@
 package tests;
 
 import org.project.base.TestBase;
+import org.project.components.ProductCardComponent;
 import org.project.pages.*;
 import org.project.utils.FileUtils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.util.List;
 
 public class PageTests extends TestBase {
 
@@ -64,7 +67,25 @@ public class PageTests extends TestBase {
 
     @Test
     public void productSearch(){
+        HomePage homePage = new HomePage(driver);
+        homePage.navigateUrl(HomePage.url);
+        Assert.assertTrue(homePage.isDisplayed());
 
+
+        ProductsPage productsPage = homePage.clickProductsButton();
+
+        Assert.assertTrue(productsPage.isAllProductsTextDisplayed());
+        Assert.assertTrue(productsPage.isProductDivDisplayed());
+
+        productsPage.setSearchText("Blue Top").clickSubmitSearchButton();
+
+        Assert.assertTrue(productsPage.isSearchProductsTextDisplayed());
+
+        List<ProductCardComponent> products = productsPage.getProductCards();
+
+        for(ProductCardComponent product:products){
+            Assert.assertEquals(product.getProductTitle(), "Blue Top");
+        }
     }
 
 }
