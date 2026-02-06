@@ -38,4 +38,19 @@ public class ProductTest extends ApiTestBase {
                 .body("responseCode", equalTo(200))
                 .body("brands", is(not(empty())));
     }
+    @Test
+    public void postAllProducts(){
+        productClient
+                .postAllBrands()
+                .then()
+                .statusCode(HttpStatus.SC_METHOD_NOT_ALLOWED);
+    }
+
+    @Test
+    public void postAllBrands(){
+        productClient
+                .postAllBrands()
+                .then()
+                .statusCode(HttpStatus.SC_METHOD_NOT_ALLOWED);
+    }
 }
