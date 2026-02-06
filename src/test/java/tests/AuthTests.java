@@ -1,4 +1,4 @@
-package auth;
+package tests;
 
 import io.restassured.response.Response;
 import org.project.base.TestBase;
@@ -206,5 +206,8 @@ public class AuthTests extends TestBase {
                 .clickSignupButtonNoRedirect();
         Assert.assertTrue(loginPage.isInvalidSignupTextDisplayed());
     }
+
+
+
 
 }
