@@ -87,12 +87,6 @@ public abstract class PageBase {
     }
 
 
-    public void assertText(String text){
-        Assert.assertTrue(isTextVisible(text));
-    }
-
-
-
 
 
     public Boolean isVisible(By locator){

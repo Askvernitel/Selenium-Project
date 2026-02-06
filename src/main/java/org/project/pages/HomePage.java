@@ -50,7 +50,7 @@ public class HomePage extends PageBase {
     }
 
     public ProductsPage clickProductsButton(){
-        click(testCaseButtonLocator);
+        click(productsButtonLocator);
         waitUrlChangeTo(ProductsPage.url);
         return new ProductsPage(driver);
     }

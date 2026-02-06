@@ -1,10 +1,7 @@
 package tests;
 
 import org.project.base.TestBase;
-import org.project.pages.ContactUsPage;
-import org.project.pages.HomePage;
-import org.project.pages.ProductsPage;
-import org.project.pages.TestCasePage;
+import org.project.pages.*;
 import org.project.utils.FileUtils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -59,6 +56,15 @@ public class PageTests extends TestBase {
         Assert.assertTrue(productsPage.isAllProductsTextDisplayed());
         Assert.assertTrue(productsPage.isProductDivDisplayed());
 
+        ProductDetailPage productDetailPage = productsPage.clickFirstProduct();
+
+        Assert.assertTrue(productDetailPage.isProductInformationVisible());
+        Assert.assertTrue(productDetailPage.areProductDetailsVisible());
+    }
+
+    @Test
+    public void productSearch(){
 
     }
+
 }

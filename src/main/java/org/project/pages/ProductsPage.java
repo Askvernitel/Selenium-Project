@@ -9,8 +9,11 @@ public class ProductsPage extends PageBase {
 
     private String allProductsText = "All Products";
 
-
     private By productListDivLocator = new By.ByCssSelector("div[class='features_items']");
+
+    private By getProductButtonLocatorByIndex(Integer i){
+        return new By.ByCssSelector(String.format("a[href='/product_details/%d']", i+1));
+    }
 
     public ProductsPage(WebDriver driver) {
         super(driver);
@@ -18,7 +21,7 @@ public class ProductsPage extends PageBase {
 
 
     public ProductDetailPage clickFirstProduct(){
-
+        click(getProductButtonLocatorByIndex(0));
         waitUrlChangeTo(ProductDetailPage.getUrlByIndex(0));
         return new ProductDetailPage(driver);
     }
