@@ -12,7 +12,7 @@ public class HomePage extends PageBase {
 
     private By.ByCssSelector loginButtonLocator = new By.ByCssSelector("a[href='/login']");
     private By.ByCssSelector deleteAccountButtonLocator = new By.ByCssSelector("a[href='/delete_account']");
-    private By.ByCssSelector contactUsButtonLocator = new By.ByCssSelector("a[href='contact_us']");
+    private By.ByCssSelector contactUsButtonLocator = new By.ByCssSelector("a[href='/contact_us']");
 
     public HomePage(WebDriver driver){
         super(driver);
@@ -38,7 +38,7 @@ public class HomePage extends PageBase {
 
     public ContactUsPage clickContactUsButton(){
         click(contactUsButtonLocator);
-        waitUrlChangeTo(LoginPage.url);
+        waitUrlChangeTo(ContactUsPage.url);
         return new ContactUsPage(driver);
     }
 

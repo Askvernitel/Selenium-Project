@@ -3,10 +3,25 @@ package org.project.utils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.InputStream;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Objects;
 
 public class FileUtils {
 
-
+    public static String getPathFor(String relativePath){
+        try {
+            Path filePath = Paths.get(
+                    Objects.requireNonNull(
+                            ClassLoader.getSystemResource(relativePath)
+                    ).toURI()
+            );
+            return filePath.toString();
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
 
 /*
     public Object[][] getJsonData(String filePath){

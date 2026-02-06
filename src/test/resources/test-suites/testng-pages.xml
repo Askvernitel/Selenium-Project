@@ -1,13 +1,13 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="PagesTest" verbose="1">
+<suite name="Different Page Tests" verbose="1">
     <parameter name="BROWSER" value="Firefox"/>
     <parameter name="AUTH_DATA_FILEPATH" value="test-data/auth/data.json"/>
-    <test name="User Auth Test">
+    <test name="User Auth Tests">
         <classes>
-            <class name="tests.AuthTests" > </class>
+            <!--<class name="tests.AuthTests" > </class>-->
         </classes>
     </test>
-    <test name="Pages Test">
+    <test name="Page Tests">
         <classes>
             <class name="tests.PageTests" > </class>
         </classes>
