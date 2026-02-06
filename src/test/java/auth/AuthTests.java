@@ -1,5 +1,6 @@
 package auth;
 
+import io.restassured.response.Response;
 import org.project.base.TestBase;
 import org.project.client.AccountClient;
 import org.project.dto.Account;
@@ -10,8 +11,15 @@ import org.testng.annotations.Test;
 public class AuthTests extends TestBase {
 
 
-    @Test
-    public void registerAccount() {
+    @Test(priority = 0)
+    public void registerNewAccount() {
+        Account account = new Account.Builder()
+                .email("DanielTestWA213451@gmail.com")
+                .password("TestPassword")
+                .build();
+        AccountClient accountClient = new AccountClient();
+        accountClient.deleteAccount(account);
+
         HomePage homePage = new HomePage(driver);
         homePage.navigateUrl(HomePage.url);
         Assert.assertTrue(homePage.isDisplayed());
@@ -57,7 +65,7 @@ public class AuthTests extends TestBase {
 
     }
 
-    @Test
+    @Test(priority = 1)
     public void loginValidAccount(){
         Account account = new Account.Builder()
                 .name("Daniel")
@@ -98,22 +106,21 @@ public class AuthTests extends TestBase {
         Assert.assertTrue(accountDeletedPage.isAccountDeletedTextVisible());
     }
 
-    @Test
+    @Test(priority = 2)
     public void loginInvalidAccount() {
         Account account = new Account.Builder()
                 .email("DanielTestWA213451@gmail.com")
                 .password("TestPassword")
                 .build();
         AccountClient accountClient = new AccountClient();
-        accountClient.deleteAccount(account);
-
+        Response resp = accountClient.deleteAccount(account);
+        System.out.println(resp.getBody().print());
         HomePage homePage = new HomePage(driver);
         homePage.navigateUrl(HomePage.url);
         Assert.assertTrue(homePage.isDisplayed());
 
         LoginPage loginPage = homePage.clickLoginButton();
         Assert.assertTrue(loginPage.isLoginTextDisplayed());
-
 
         loginPage.setLoginEmail("DanielTestWA213451@gmail.com")
                 .setLoginPassword("TestPassword")
@@ -123,7 +130,7 @@ public class AuthTests extends TestBase {
     }
 
 
-    @Test
+    @Test(priority = 3)
     public void logoutAccount(){
         Account account = new Account.Builder()
                 .name("Daniel")
@@ -159,7 +166,45 @@ public class AuthTests extends TestBase {
                 .setLoginPassword("TestPassword")
                 .clickLoginButton();
 
+        Assert.assertTrue(homePage.isTextVisible("Logged in as Daniel"));
 
+    }
+
+    @Test(priority = 4)
+    public void registerExistingAccount() {
+        Account account = new Account.Builder()
+                .name("Daniel")
+                .email("DanielTestWA213451@gmail.com")
+                .password("TestPassword")
+                .title("Mr")
+                .birthDate("1")
+                .birthMonth("February")
+                .birthYear("2006")
+                .firstname("Daniel")
+                .lastname("Kolotashvili")
+                .company("CoolSoft")
+                .address1("Test Addres 1")
+                .address2("Test Address 2")
+                .country("Canada")
+                .state("Canada State")
+                .city("City")
+                .zipcode("1400")
+                .mobileNumber("5010")
+                .build();
+        AccountClient accountClient = new AccountClient();
+        accountClient.createAccount(account);
+
+        HomePage homePage = new HomePage(driver);
+        homePage.navigateUrl(HomePage.url);
+        Assert.assertTrue(homePage.isDisplayed());
+
+        LoginPage loginPage = homePage.clickLoginButton();
+        Assert.assertTrue(loginPage.isSignupTextDisplayed());
+
+        loginPage.setSignupName("Daniel")
+                .setSignupEmail("DanielTestWA213451@gmail.com")
+                .clickSignupButtonNoRedirect();
+        Assert.assertTrue(loginPage.isInvalidSignupTextDisplayed());
     }
 
 }

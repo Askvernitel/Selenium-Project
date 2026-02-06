@@ -30,6 +30,12 @@ public class HomePage extends PageBase {
         return new LoginPage(driver);
     }
 
+    public LoginPage clickLogoutButton(){
+        click(loginButtonLocator);
+        waitUrlChangeTo(LoginPage.url);
+        return new LoginPage(driver);
+    }
+
 
 
     public boolean isDisplayed(){

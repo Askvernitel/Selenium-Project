@@ -4,7 +4,7 @@
     <parameter name="AUTH_DATA_FILEPATH" value="test-data/auth/data.json"/>
     <test name="User Auth Test">
         <classes>
-            <class name="auth.AuthTests"> </class>
+            <class name="auth.AuthTests" > </class>
         </classes>
     </test>
 </suite>

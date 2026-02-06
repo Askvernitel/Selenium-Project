@@ -17,9 +17,9 @@ public class AccountClient {
 
 
     public Response deleteAccount(Account account){
-        return given().spec(RequestSpecFactory.defaultJsonSpec())
-                .body(account)
+        return given().spec(RequestSpecFactory.defaultFormDataSpec())
+                .formParams(account.toMap())
                 .when()
-                .post("/deleteAccount");
+                .delete("/deleteAccount");
     }
 }
