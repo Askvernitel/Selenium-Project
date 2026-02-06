@@ -12,6 +12,6 @@ public class ProductClient {
     public Response getAllProducts(){
         return given().spec(RequestSpecFactory.defaultJsonSpec())
                 .when()
-                .post("/productsList");
+                .get("/productsList");
     }
 }
