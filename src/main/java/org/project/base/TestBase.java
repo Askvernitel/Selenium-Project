@@ -10,8 +10,10 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
 public abstract class TestBase {
-    Config config;
-    WebDriver driver;
+    protected Config config;
+    protected WebDriver driver;
+
+
     @BeforeClass
     public void setup(ITestContext testContext){
         config = new Config(testContext.getCurrentXmlTest().getAllParameters());

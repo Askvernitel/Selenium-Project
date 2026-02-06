@@ -3,8 +3,10 @@
     <parameter name="BROWSER" value="Firefox"/>
     <parameter name="DRIVER_ARGUMENTS" value=""/>
     <parameter name="AUTH_DATA_FILEPATH" value="test-data/auth/data.json"/>
-    <test name="UserAuth">
+    <parameter name="HOMEPAGE_URL" value="https://automationexercise.com/"/>
+    <test name="User Auth Test">
         <classes>
+            <class name="auth.AuthTests"> </class>
         </classes>
     </test>
 </suite>
