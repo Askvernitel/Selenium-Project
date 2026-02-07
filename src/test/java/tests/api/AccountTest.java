@@ -1,12 +1,15 @@
 package tests.api;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.qameta.allure.*;
 import io.restassured.parsing.Parser;
+import io.restassured.response.Response;
 import io.restassured.response.ResponseBody;
 import org.apache.hc.core5.http.HttpStatus;
 import org.project.base.ApiTestBase;
 import org.project.client.AccountClient;
 import org.project.dto.Account;
+import org.project.utils.ApiUtils;
 import org.project.utils.TestDataFactory;
 import org.testng.annotations.Test;
 
@@ -27,14 +30,16 @@ public class AccountTest extends ApiTestBase {
     @Severity(SeverityLevel.BLOCKER)
     public void createAccount(){
         Account account = TestDataFactory.getAccount();
+        ApiUtils.attachRequest(account);
         accountClient.deleteAccount(account);
-        accountClient.createAccount(account)
-                .then()
+        Response response = accountClient.createAccount(account);
+        response.then()
                 .statusCode(HttpStatus.SC_SUCCESS)
                 .parser("text/html", Parser.JSON)
                 .body("responseCode", equalTo(201))
                 .body("message", equalTo("User created!"));
 
+        ApiUtils.attachResponse(response);
     }
 
     @Test
@@ -87,7 +92,7 @@ public class AccountTest extends ApiTestBase {
     public void loginValidCredentials(){
         Account account = TestDataFactory.getAccount();
 
-        accountClient.deleteAccount(account);
+        accountClient.createAccount(account);
 
         accountClient.postVerifyLogin(account.getEmail(), account.getPassword())
                 .then()
@@ -104,6 +109,7 @@ public class AccountTest extends ApiTestBase {
         Account account = TestDataFactory.getAccount();
 
         accountClient.deleteAccount(account);
+
         accountClient.postVerifyLogin(account.getEmail(), account.getPassword())
                 .then()
                 .parser("text/html", Parser.JSON)

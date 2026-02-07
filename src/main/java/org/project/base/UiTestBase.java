@@ -1,5 +1,6 @@
 package org.project.base;
 
+import io.qameta.allure.*;
 import org.openqa.selenium.WebDriver;
 import org.project.enums.ConfigType;
 import org.project.enums.DriverType;
@@ -27,6 +28,9 @@ public abstract class UiTestBase {
 
 
     @AfterMethod
+    @Story("Failing of Test")
+    @Description("Failed Test")
+    @Step("Failed Test")
     public void afterFail(ITestResult result){
         if(!result.isSuccess()){
             DriverUtils.screenshot(driver);

@@ -1,5 +1,6 @@
 package org.project.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.project.base.PageBase;
@@ -23,71 +24,83 @@ public class HomePage extends PageBase {
 
     private By footerLocator = new By.ById("footer");
 
-    public HomePage(WebDriver driver){
+    public HomePage(WebDriver driver) {
         super(driver);
     }
 
-    public HomePage setSubscribeEmail(String input){
-        input(subscriptionEmailInputLocator,input);
+    @Step("Enter subscription email '{input}'")
+    public HomePage setSubscribeEmail(String input) {
+        input(subscriptionEmailInputLocator, input);
         return this;
     }
 
+    @Step("Scroll to footer")
     public HomePage scrollToFooter() {
         scrollTo(footerLocator);
         return this;
     }
 
-    public AccountDeletedPage clickDeleteAccountButton(){
+    @Step("Click 'Delete Account' button")
+    public AccountDeletedPage clickDeleteAccountButton() {
         click(deleteAccountButtonLocator);
         waitUrlChangeTo(AccountDeletedPage.url);
         return new AccountDeletedPage(driver);
     }
 
-    public LoginPage clickLoginButton(){
+    @Step("Click 'Login' button")
+    public LoginPage clickLoginButton() {
         click(loginButtonLocator);
         waitUrlChangeTo(LoginPage.url);
         return new LoginPage(driver);
     }
 
-    public LoginPage clickLogoutButton(){
+    @Step("Click 'Logout' button")
+    public LoginPage clickLogoutButton() {
         click(loginButtonLocator);
         waitUrlChangeTo(LoginPage.url);
         return new LoginPage(driver);
     }
 
-    public ContactUsPage clickContactUsButton(){
+    @Step("Click 'Contact Us' button")
+    public ContactUsPage clickContactUsButton() {
         click(contactUsButtonLocator);
         waitUrlChangeTo(ContactUsPage.url);
         return new ContactUsPage(driver);
     }
-    public TestCasePage clickTestCaseButton(){
+
+    @Step("Click 'Test Cases' button")
+    public TestCasePage clickTestCaseButton() {
         click(testCaseButtonLocator);
         waitUrlChangeTo(TestCasePage.url);
         return new TestCasePage(driver);
     }
 
-    public ProductsPage clickProductsButton(){
+    @Step("Click 'Products' button")
+    public ProductsPage clickProductsButton() {
         click(productsButtonLocator);
         waitUrlChangeTo(ProductsPage.url);
         return new ProductsPage(driver);
     }
 
-    public void clickSubscriptionButton(){
+    @Step("Click subscription button")
+    public void clickSubscriptionButton() {
         click(subscriptionButtonLocator);
     }
 
-
-
-    public Boolean isSubscriptionTextVisible(){
+    @Step("Verify 'Subscription' text is visible")
+    public Boolean isSubscriptionTextVisible() {
         return isTextVisible(subscriptionText);
     }
-    public Boolean isSuccessfulSubscriptionTextVisible(){
+
+    @Step("Verify successful subscription message is visible")
+    public Boolean isSuccessfulSubscriptionTextVisible() {
         return isTextVisible(successfulSubscriptionText);
     }
-    public Boolean isDisplayed(){
+
+    @Step("Verify home page is displayed")
+    public Boolean isDisplayed() {
         return findElement(logoLocator).isDisplayed();
     }
-
 
 
 }

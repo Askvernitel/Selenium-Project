@@ -1,5 +1,6 @@
 package org.project.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.project.base.PageBase;
@@ -26,63 +27,71 @@ public class LoginPage extends PageBase{
     }
 
 
+    @Step("Enter signup name '{input}'")
     public LoginPage setSignupName(String input){
         input(signupNameInputLocator, input);
         return this;
     }
 
+    @Step("Enter signup email '{input}'")
     public LoginPage setSignupEmail(String input){
         input(signupEmailInputLocator, input);
         return this;
     }
+
+    @Step("Enter login email '{input}'")
     public LoginPage setLoginEmail(String input) {
         input(loginEmailInputLocator, input);
         return this;
     }
 
+    @Step("Enter login password")
     public LoginPage setLoginPassword(String input) {
         input(loginPasswordInputLocator, input);
         return this;
     }
 
+    @Step("Click signup button")
     public SignupPage clickSignupButton(){
         click(signupButtonLocator);
         waitUrlChangeTo(SignupPage.url);
         return new SignupPage(driver);
     }
 
+    @Step("Click login button")
     public HomePage clickLoginButton(){
         click(loginButtonLocator);
         waitUrlChangeTo(HomePage.url);
         return new HomePage(driver);
     }
 
-
+    @Step("Verify 'New User Signup!' text is displayed")
     public Boolean isSignupTextDisplayed(){
         return isTextVisible(signupText);
     }
 
+    @Step("Verify 'Login to your account' text is displayed")
     public Boolean isLoginTextDisplayed(){
         return isTextVisible(loginText);
     }
 
+    @Step("Verify invalid login error message is displayed")
     public Boolean isInvalidLoginTextDisplayed(){
         return isTextVisible(invalidLoginText);
     }
 
+    @Step("Verify invalid signup error message is displayed")
     public Boolean isInvalidSignupTextDisplayed(){
         return isTextVisible(invalidSignupText);
     }
 
-
-
-
+    @Step("Click login button without redirect")
     public void clickLoginButtonNoRedirect() {
         click(loginButtonLocator);
     }
+
+    @Step("Click signup button without redirect")
     public void clickSignupButtonNoRedirect(){
         click(signupButtonLocator);
     }
-
-
 }

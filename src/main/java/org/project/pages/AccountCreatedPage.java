@@ -1,5 +1,6 @@
 package org.project.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -15,13 +16,14 @@ public class AccountCreatedPage extends PageBase {
         super(driver);
     }
 
+    @Step("Click continue button")
     public HomePage clickContinueButton() {
         click(continueButton);
         return new HomePage(driver);
     }
 
+    @Step("Verify 'Account Created!' text is visible")
     public Boolean isAccountCreatedTextVisible(){
         return isTextVisible(accountCreatedText);
     }
-
 }

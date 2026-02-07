@@ -1,5 +1,6 @@
 package org.project.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -22,40 +23,49 @@ public class ProductDetailPage extends PageBase {
     }
 
 
+    @Step("Verify product name is visible")
     public Boolean isProductNameVisible(){
         WebElement root = findElement(productInformationDivLocator);
         return root.findElement(productNameLocator).isDisplayed();
     }
 
+    @Step("Verify product category is visible")
     public Boolean isProductCategoryVisible(){
         WebElement root = findElement(productInformationDivLocator);
         return root.findElement(productCategoryLocator).isDisplayed();
     }
 
+    @Step("Verify product price is visible")
     public Boolean isProductPriceVisible(){
         WebElement root = findElement(productInformationDivLocator);
         return root.findElement(productPriceLocator).isDisplayed();
     }
 
+    @Step("Verify product availability is visible")
     public Boolean isProductAvailabilityVisible(){
         WebElement root = findElement(productInformationDivLocator);
         return root.findElement(productAvailabilityLocator).isDisplayed();
     }
 
+    @Step("Verify product condition is visible")
     public Boolean isProductConditionVisible(){
         WebElement root = findElement(productInformationDivLocator);
         return root.findElement(productConditionLocator).isDisplayed();
     }
 
+    @Step("Verify product brand is visible")
     public Boolean isProductBrandVisible(){
         WebElement root = findElement(productInformationDivLocator);
         return root.findElement(productBrandLocator).isDisplayed();
     }
+
+    @Step("Verify product information section is visible")
     public Boolean isProductInformationVisible(){
         return isVisible(productInformationDivLocator);
     }
-    public Boolean areProductDetailsVisible(){
 
+    @Step("Verify all product details are visible")
+    public Boolean areProductDetailsVisible(){
         Boolean nameVisible = isProductNameVisible();
         Boolean categoryVisible = isProductCategoryVisible();
         Boolean priceVisible = isProductPriceVisible();
@@ -69,12 +79,9 @@ public class ProductDetailPage extends PageBase {
         System.out.println("Product Availability Visible: " + availabilityVisible);
         System.out.println("Product Condition Visible: " + conditionVisible);
         System.out.println("Product Brand Visible: " + brandVisible);
-        return isProductNameVisible()
-                && isProductCategoryVisible()
-                && isProductPriceVisible()
-                && isProductAvailabilityVisible()
-                && isProductConditionVisible()
-                && isProductBrandVisible();
+
+        return nameVisible && categoryVisible && priceVisible &&
+                availabilityVisible && conditionVisible && brandVisible;
     }
 
     public ProductDetailPage(WebDriver driver) {

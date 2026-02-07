@@ -1,5 +1,6 @@
 package org.project.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.project.base.PageBase;
 
@@ -13,7 +14,7 @@ public class TestCasePage extends PageBase {
         super(driver);
     }
 
-
+    @Step("Check that Test Case Text is Displayed")
     public Boolean isTestCaseTextDisplayed(){
         return isTextVisible(testCaseText);
     }

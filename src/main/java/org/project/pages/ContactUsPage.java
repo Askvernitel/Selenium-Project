@@ -1,5 +1,6 @@
 package org.project.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -24,53 +25,61 @@ public class ContactUsPage extends PageBase {
         super(driver);
     }
 
+    @Step("Enter name '{input}'")
     public ContactUsPage setName(String input) {
         input(nameInputLocator, input);
         return this;
     }
 
+    @Step("Enter email '{input}'")
     public ContactUsPage setEmail(String input) {
         input(emailInputLocator, input);
         return this;
     }
 
+    @Step("Enter subject '{input}'")
     public ContactUsPage setSubject(String input) {
         input(subjectInputLocator, input);
         return this;
     }
 
+    @Step("Enter message '{input}'")
     public ContactUsPage setMessage(String input) {
         input(messageInputLocator, input);
         return this;
     }
 
+    @Step("Upload file from path '{filePath}'")
     public ContactUsPage setUploadFilePath(String filePath){
         WebElement element = findElement(fileInputLocator);
-
         element.sendKeys(filePath);
         return this;
     }
 
+    @Step("Click submit button")
     public ContactUsPage clickSubmitButton(){
         click(submitButtonLocator);
         return this;
     }
 
+    @Step("Click home button")
     public HomePage clickHomeButton(){
         click(homeButtonLocator);
         waitUrlChangeTo(HomePage.url);
         return new HomePage(driver);
     }
 
+    @Step("Accept alert")
     public void acceptAlert(){
         driver.switchTo().alert().accept();
     }
 
+    @Step("Verify 'Get In Touch' text is displayed")
     public Boolean isGetInTouchTextDisplayed(){
         return this.isTextVisible(getInTouchText);
     }
 
-
+    @Step("Verify successful submission message is displayed")
     public Boolean isSuccessfulSubmitTextDisplayed(){
         return this.isTextVisible(successfulSubmitText);
     }

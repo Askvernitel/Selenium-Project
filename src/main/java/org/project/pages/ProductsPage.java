@@ -1,5 +1,6 @@
 package org.project.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -30,31 +31,41 @@ public class ProductsPage extends PageBase {
     }
 
 
+    @Step("Enter search text '{input}'")
     public ProductsPage setSearchText(String input){
         input(searchTextInputLocator, input);
         return this;
     }
 
+    @Step("Click on first product")
     public ProductDetailPage clickFirstProduct(){
         click(getProductButtonLocatorByIndex(0));
         waitUrlChangeTo(ProductDetailPage.getUrlByIndex(0));
         return new ProductDetailPage(driver);
     }
 
-
+    @Step("Get all product cards")
     public List<ProductCardComponent> getProductCards(){
-        return findElements(productCardLocator).stream().map(ProductCardComponent::new).toList();
+        return findElements(productCardLocator).stream()
+                .map(ProductCardComponent::new).toList();
     }
+
+    @Step("Click search submit button")
     public void clickSubmitSearchButton(){
         click(submitSearchButtonLocator);
     }
 
+    @Step("Verify product list is displayed")
     public Boolean isProductDivDisplayed(){
         return isDisplayed(productListDivLocator);
     }
+
+    @Step("Verify 'All Products' text is displayed")
     public Boolean isAllProductsTextDisplayed(){
         return this.isTextVisible(allProductsText);
     }
+
+    @Step("Verify 'Searched Products' text is displayed")
     public Boolean isSearchProductsTextDisplayed(){
         return this.isTextVisible(searchedProductsText);
     }
