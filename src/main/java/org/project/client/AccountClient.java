@@ -25,23 +25,35 @@ public class AccountClient {
 
     public Response updateAccount(Account account){
         return given().spec(RequestSpecFactory.defaultFormDataSpec())
+                //.body(account)
                 .formParams(account.toMap())
                 .when()
-                .delete("/deleteAccount");
+                .put("/updateAccount");
     }
 
-
     public Response getAccountByEmail(String email){
-        String requestBody = String.format("""
-            {
-            "email":"%s"
-            }
-        """, email);
-        return given().spec(RequestSpecFactory.defaultJsonSpec())
-                .body(requestBody)
+        return given().spec(RequestSpecFactory.defaultFormDataSpec())
+                .param("email", email)
                 .when()
                 .get("/getUserDetailByEmail");
     }
 
+    public Response postVerifyLogin(String email, String password){
+
+        return given().spec(RequestSpecFactory.defaultFormDataSpec())
+                .param("email", email)
+                .param("password", password)
+                .when()
+                .post("/verifyLogin");
+    }
+
+
+    public Response deleteVerifyLogin(String email, String password){
+        return given().spec(RequestSpecFactory.defaultJsonSpec())
+                .param("email", email)
+                .param("password", password)
+                .when()
+                .delete("/verifyLogin");
+    }
 
 }

@@ -1,6 +1,5 @@
 package tests.api;
 
-import io.restassured.http.ContentType;
 import io.restassured.parsing.Parser;
 import org.apache.hc.core5.http.HttpStatus;
 import org.project.base.ApiTestBase;
@@ -41,16 +40,20 @@ public class ProductTest extends ApiTestBase {
     @Test
     public void postAllProducts(){
         productClient
-                .postAllBrands()
+                .postAllProducts()
                 .then()
-                .statusCode(HttpStatus.SC_METHOD_NOT_ALLOWED);
+                .parser("text/html", Parser.JSON)
+                .body("responseCode", equalTo(405));
     }
 
     @Test
     public void postAllBrands(){
         productClient
-                .postAllBrands()
+                .putAllBrands()
                 .then()
-                .statusCode(HttpStatus.SC_METHOD_NOT_ALLOWED);
+                .parser("text/html", Parser.JSON)
+                .body("responseCode", equalTo(405));
     }
+
+
 }

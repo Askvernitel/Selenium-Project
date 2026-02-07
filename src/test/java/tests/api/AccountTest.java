@@ -1,7 +1,9 @@
 package tests.api;
 
 import io.restassured.parsing.Parser;
+import io.restassured.response.ResponseBody;
 import org.apache.hc.core5.http.HttpStatus;
+import org.project.base.ApiTestBase;
 import org.project.client.AccountClient;
 import org.project.dto.Account;
 import org.project.utils.TestDataFactory;
@@ -10,7 +12,7 @@ import org.testng.annotations.Test;
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.Matchers.empty;
 
-public class AccountTest {
+public class AccountTest extends ApiTestBase {
 
     private final AccountClient accountClient = new AccountClient();
     @Test
@@ -33,12 +35,58 @@ public class AccountTest {
         accountClient.deleteAccount(account)
                 .then()
                 .statusCode(HttpStatus.SC_SUCCESS)
+                .parser("text/html", Parser.JSON)
                 .body("responseCode", equalTo(200))
-                .body("message", equalTo("User updated!"));
+                .body("message", equalTo("Account deleted!"));
 
         accountClient.getAccountByEmail(account.getEmail())
                 .then()
-                .statusCode(not(equalTo(200)));
+                .body("responseCode", not(equalTo(200)));
+    }
+
+
+    @Test
+    public void updateAccount(){
+        Account account = TestDataFactory.getAccount();
+        accountClient.createAccount(account);
+
+        account.setName("Test");
+        accountClient.updateAccount(account)
+                        .then()
+                        .statusCode(HttpStatus.SC_SUCCESS)
+                        .parser("text/html", Parser.JSON)
+                        .body("responseCode", equalTo(200))
+                        .body("message", equalTo("User updated!"));
+
+        accountClient.getAccountByEmail(account.getEmail())
+                .then()
+                .parser("text/html", Parser.JSON)
+                .body("user.name", equalTo("Test"));
+    }
+
+
+    @Test
+    public void validVerifyLogin(){
+        Account account = TestDataFactory.getAccount();
+
+        accountClient.createAccount(account);
+        accountClient.postVerifyLogin(account.getEmail(), account.getPassword())
+                .then()
+                .parser("text/html", Parser.JSON)
+                .body("responseCode", equalTo(200))
+                .body("message", equalTo("User exists!"));
+    }
+
+    @Test
+    public void invalidVerifyLogin(){
+        Account account = TestDataFactory.getAccount();
+
+        accountClient.createAccount(account);
+        accountClient.deleteVerifyLogin(account.getEmail(), account.getPassword())
+                .then()
+                .parser("text/html", Parser.JSON)
+                .body("responseCode", equalTo(HttpStatus.SC_METHOD_NOT_ALLOWED))
+                .body("message", equalTo("This request method is not supported."));
     }
 
 

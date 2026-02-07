@@ -1,7 +1,6 @@
 package org.project.client;
 
 import io.restassured.response.Response;
-import org.project.dto.Account;
 import org.project.utils.RequestSpecFactory;
 
 import static io.restassured.RestAssured.given;
@@ -27,19 +26,16 @@ public class ProductClient {
     }
 
 
-    public Response postAllBrands(){
+    public Response putAllBrands(){
         return given().spec(RequestSpecFactory.defaultJsonSpec())
                 .when()
-                .post("/productsList");
+                .put("/brandsList");
     }
-
-
-
 
     public Response searchAllProducts(){
         return given().spec(RequestSpecFactory.defaultJsonSpec())
                 .when()
-                .get("/brandsList");
+                .post("/searchProduct");
     }
 
 

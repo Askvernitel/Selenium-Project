@@ -6,7 +6,6 @@
         </classes>
     </test>
     <test name="Product API Tests">
-
         <classes>
             <class name="tests.api.ProductTest" > </class>
         </classes>
