@@ -5,8 +5,11 @@ import org.project.enums.ConfigType;
 import org.project.enums.DriverType;
 import org.project.utils.Config;
 import org.project.utils.DriverFactory;
+import org.project.utils.DriverUtils;
 import org.testng.ITestContext;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 
 public abstract class UiTestBase {
@@ -23,6 +26,12 @@ public abstract class UiTestBase {
     }
 
 
+    @AfterMethod
+    public void afterFail(ITestResult result){
+        if(!result.isSuccess()){
+            DriverUtils.screenshot(driver);
+        }
+    }
     @AfterClass
     public void teardown(){
         if(driver != null){
