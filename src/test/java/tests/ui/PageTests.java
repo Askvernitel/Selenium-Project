@@ -1,5 +1,6 @@
 package tests.ui;
 
+import io.qameta.allure.*;
 import org.project.base.UiTestBase;
 import org.project.components.ProductCardComponent;
 import org.project.pages.*;
@@ -8,10 +9,14 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.List;
-
+@Epic("UI Tests")
+@Feature("Page Functionality")
 public class PageTests extends UiTestBase {
 
     @Test
+    @Story("Contact Us")
+    @Description("Verify that users can submit a contact form with file attachment")
+    @Severity(SeverityLevel.NORMAL)
     public void contactUsPage(){
         HomePage homePage = new HomePage(driver);
         homePage.navigateUrl(HomePage.url);
@@ -38,6 +43,9 @@ public class PageTests extends UiTestBase {
 
 
     @Test
+    @Story("Test Cases Page")
+    @Description("Verify that test cases page is accessible and displays correctly")
+    @Severity(SeverityLevel.MINOR)
     public void testCasePage(){
         HomePage homePage = new HomePage(driver);
         homePage.navigateUrl(HomePage.url);
@@ -49,6 +57,9 @@ public class PageTests extends UiTestBase {
 
     }
     @Test
+    @Story("Product Details")
+    @Description("Verify that product page displays all product information correctly")
+    @Severity(SeverityLevel.NORMAL)
     public void productPage(){
         HomePage homePage = new HomePage(driver);
         homePage.navigateUrl(HomePage.url);
@@ -66,6 +77,9 @@ public class PageTests extends UiTestBase {
     }
 
     @Test
+    @Story("Product Search")
+    @Description("Verify that users can search for products and get accurate results")
+    @Severity(SeverityLevel.CRITICAL)
     public void searchProduct(){
         HomePage homePage = new HomePage(driver);
         homePage.navigateUrl(HomePage.url);
@@ -90,6 +104,9 @@ public class PageTests extends UiTestBase {
 
 
     @Test
+    @Story("Newsletter Subscription")
+    @Description("Verify that users can subscribe to newsletter from footer")
+    @Severity(SeverityLevel.NORMAL)
     public void verifySubscription(){
         HomePage homePage = new HomePage(driver);
         homePage.navigateUrl(HomePage.url);
