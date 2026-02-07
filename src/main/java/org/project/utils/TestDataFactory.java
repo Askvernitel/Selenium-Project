@@ -1,14 +1,15 @@
 package org.project.utils;
 
-import org.project.dto.Account;
+import org.project.dtos.Account;
+import org.project.dtos.Contact;
 
 public class TestDataFactory {
 
 
-    static{
+    static {
     }
 
-    public static Account getAccount(){
+    public static Account getAccount() {
         return new Account.Builder()
                 .name("Daniel")
                 .email("DanielTestWA213451@gmail.com")
@@ -27,6 +28,17 @@ public class TestDataFactory {
                 .city("City")
                 .zipcode("1400")
                 .mobileNumber("5010")
+                .build();
+    }
+
+
+    public static Contact getContact() {
+        return new Contact.Builder()
+                .email("Daniel@gmail.com")
+                .name("Daniel")
+                .subject("Test Subject")
+                .message("Test Message")
+                .uploadFilePath("test-files/test.txt")
                 .build();
     }
 }

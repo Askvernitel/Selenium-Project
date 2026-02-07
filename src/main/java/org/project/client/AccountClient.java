@@ -2,7 +2,7 @@ package org.project.client;
 import static io.restassured.RestAssured.*;
 
 import io.restassured.response.Response;
-import org.project.dto.Account;
+import org.project.dtos.Account;
 import org.project.utils.RequestSpecFactory;
 
 public class AccountClient {
@@ -25,7 +25,6 @@ public class AccountClient {
 
     public Response updateAccount(Account account){
         return given().spec(RequestSpecFactory.defaultFormDataSpec())
-                //.body(account)
                 .formParams(account.toMap())
                 .when()
                 .put("/updateAccount");

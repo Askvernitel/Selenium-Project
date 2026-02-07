@@ -6,7 +6,7 @@ import io.restassured.response.Response;
 import org.apache.hc.core5.http.HttpStatus;
 import org.project.base.ApiTestBase;
 import org.project.client.AccountClient;
-import org.project.dto.Account;
+import org.project.dtos.Account;
 import org.project.utils.ApiUtils;
 import org.project.utils.TestDataFactory;
 import org.testng.annotations.Test;
