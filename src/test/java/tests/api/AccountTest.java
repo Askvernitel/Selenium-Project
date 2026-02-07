@@ -66,10 +66,11 @@ public class AccountTest extends ApiTestBase {
 
 
     @Test
-    public void validVerifyLogin(){
+    public void loginValidCredentials(){
         Account account = TestDataFactory.getAccount();
 
         accountClient.createAccount(account);
+
         accountClient.postVerifyLogin(account.getEmail(), account.getPassword())
                 .then()
                 .parser("text/html", Parser.JSON)
@@ -78,7 +79,18 @@ public class AccountTest extends ApiTestBase {
     }
 
     @Test
-    public void invalidVerifyLogin(){
+    public void loginInvalidCredentials(){
+        Account account = TestDataFactory.getAccount();
+
+        accountClient.deleteAccount(account);
+        accountClient.postVerifyLogin(account.getEmail(), account.getPassword())
+                .then()
+                .parser("text/html", Parser.JSON)
+                .body("responseCode", not(equalTo(200)))
+                .body("message", not(equalTo("User exists!")));
+    }
+    @Test
+    public void loginBadRequest(){
         Account account = TestDataFactory.getAccount();
 
         accountClient.createAccount(account);
